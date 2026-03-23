@@ -19,11 +19,18 @@ jobs:
           python-version: '3.11'
 
       - name: install libs
-        run: pip install requests pandas
+        run: pip install requests pandas google-auth google-auth-oauthlib google-api-python-client
 
-      - name: run script
+      - name: run SP-API script
         run: python ama_accessdata.py
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+
+      - name: upload CSV to Google Drive
+        run: python upload_to_gdrive.py
+        env:
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
