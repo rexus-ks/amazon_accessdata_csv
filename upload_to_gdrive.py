@@ -23,10 +23,10 @@ if not list_of_files:
 file_name = max(list_of_files, key=os.path.getmtime)  # 更新日時で最新ファイルを選択
 
 # --- Google Drive 上の保存先指定（任意のフォルダID） ---
-folder_id = 'GOOGLE_DRIVE_FOLDER_ID'  # ←ここをアップロード先フォルダIDに置き換える
+folder_id = '1ZvEUgAFy2Rzq7GXcnoWst2-ZNcruiesL'  # 文字列として指定
 file_metadata = {
-    'name': file_name,  # Drive 上でも同じ名前で保存
-    'parents': [1ZvEUgAFy2Rzq7GXcnoWst2-ZNcruiesL]  # 指定フォルダに保存
+    'name': file_name,
+    'parents': [folder_id]  # リストに文字列を入れる
 }
 
 # --- アップロード ---
