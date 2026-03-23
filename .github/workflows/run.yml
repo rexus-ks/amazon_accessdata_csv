@@ -1,0 +1,29 @@
+name: run sp-api
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 18 * * *'  # 毎日3時（JST）
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: install libs
+        run: pip install requests pandas
+
+      - name: run script
+        run: python ama_accessdata.py
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
